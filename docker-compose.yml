@@ -1,0 +1,18 @@
+# Local MongoDB for development (no Atlas required)
+# Start: docker compose up -d
+# Stop:  docker compose down
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mosque-finance-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mosque_mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: mosque_finance
+
+volumes:
+  mosque_mongo_data:

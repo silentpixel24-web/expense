@@ -1,0 +1,37 @@
+# Render Blueprint — deploy backend API
+# Docs: https://render.com/docs/blueprint-spec
+#
+# After deploy, set FRONTEND_URL to your Vercel URL in the Render dashboard.
+
+services:
+  - type: web
+    name: mosque-finance-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: FRONTEND_URL
+        sync: false
+      - key: UPLOAD_DIR
+        value: uploads
+      - key: MOSQUE_NAME
+        sync: false
+      - key: CURRENCY
+        value: INR
+      - key: CURRENCY_SYMBOL
+        value: ₹
+      - key: UPI_MERCHANT_ID
+        sync: false
